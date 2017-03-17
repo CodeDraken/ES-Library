@@ -22,7 +22,7 @@ const Home = ({factions}) => {
       <SelectPage links={factions} title='Select a Faction' />
 
     </div>
-  )
+  );
 };
 
 export default Home;

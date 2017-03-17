@@ -3,9 +3,9 @@ import {Route, Link} from 'react-router-dom';
 import axios from 'axios';
 
 import Home from './Home';
-import FactionPage from './FactionPage';
-import FactionPageShips from './FactionPageShips';
 import SelectPage from './SelectPage';
+import InfoPage from './InfoPage';
+import ShipPage from './ShipPage';
 
 class App extends Component {
   constructor(props) {
@@ -58,22 +58,21 @@ class App extends Component {
 
           <Route exact path="/" render={ ({match}) => (
             <Home match={match} factions={Object.keys(this.state.factions)} />
-            )} />
+          )} />
 
           <Route exact path="/:faction" render={ ({match}) => (
-            <SelectPage match={match} title='What do you want to know about?' links={[]}>
-              <Link to={`${match.url}/ships`} className="collection-item">Ships</Link>
-              <Link to={`${match.url}/outfits`} className="collection-item">Outfits</Link>
-            </SelectPage>
+            <SelectPage match={match} title='What do you want to know about?' links={['Ships', 'Outfits']} relative={true} />
           )} />
 
-          <Route path={`/:faction/ships`} render={ ({match}) => (
-            <SelectPage match={match} title='Select a ship' links={Object.keys(this.state.factions[match.params.faction].ships)} />
+          <Route exact path={`/:faction/ships`} render={ ({match}) => (
+            <SelectPage match={match} title='Select a ship' relative={true} links={Object.keys(this.state.factions[match.params.faction].ships)} />
           )} />
 
+          <Route path={`/:faction/ships/:ship`} render={ ({match}) => (
+            <ShipPage match={match} title='Ship' data={this.state.factions[match.params.faction].ships[match.params.ship]} />
+          )} />
 
         </main>
-        
 
       </div>
     );
@@ -82,12 +81,12 @@ class App extends Component {
 
 export default App;
 
-// <Route path={`/:faction/ships`} render={ () => (
-//   <FactionPageShips ships={ships} />
-// )} />
-
 // ships={this.state.ships[match.params.faction]}
 
 // <Route path={`/:faction/ships`} render={ ({match}) => (
 //   <SelectPage match={match} title='Select a ship' links={Object.keys(this.state.ships[match.params.faction]) || []} />
 // )} />
+
+
+              // <Link to={`${match.url}/ships`} className="collection-item">Ships</Link>
+              // <Link to={`${match.url}/outfits`} className="collection-item">Outfits</Link>
