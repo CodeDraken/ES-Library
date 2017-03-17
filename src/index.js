@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import {HashRouter as Router, Route, IndexRoute} from 'react-router-dom';
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-);
+import App from './components/App';
+
+import './css/main.css';
+
+// ReactDOM.render(
+//   <Router>
+//     <Route path="/" component={App}>
+//     </Route>
+//   </Router>,
+//   document.getElementById('root')
+// );
