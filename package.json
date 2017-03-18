@@ -2,7 +2,7 @@
   "name": "es-library",
   "version": "0.1.0",
   "private": true,
-  "hompage": "https://codedraken.github.io/ES-Library/",
+  "homepage": "https://codedraken.github.io/ES-Library/",
   
   "dependencies": {
     "react": "^15.4.2",
