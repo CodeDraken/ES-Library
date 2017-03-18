@@ -3,12 +3,10 @@ import React from 'react';
 //import sprite from './../img/ship/aerie.png';
 
 const ShipPage = (props) => {
-  console.log('ShipPage match: ', props);
   const ship = props.data;
   let sprite;
 
   try {
-    console.log(`ship sprite: ${ship.sprite}`);
     sprite = require(`./../img/${(ship.sprite).replace(/ /g, '_')}.png`);
   } catch(err) {
     console.warn(err)
