@@ -1,9 +1,7 @@
 import React from 'react';
+import PrevButton from './PrevButton';
 
-//import sprite from './../img/ship/aerie.png';
-
-const ShipPage = (props) => {
-  const ship = props.data;
+const ShipPage = ({ship, match}) => {
   let sprite;
 
   try {
@@ -20,6 +18,9 @@ const ShipPage = (props) => {
   
   return (
     <section>
+
+    {match && match.url ? <PrevButton url={match.url} /> : ''}
+
       <h3>
         {ship.name}
       </h3>
@@ -76,7 +77,7 @@ const ShipPage = (props) => {
 };
 
 ShipPage.defaultProps = {
-  data: {
+  ship: {
     attributes: {
       automation: false,
       bunks: 0,

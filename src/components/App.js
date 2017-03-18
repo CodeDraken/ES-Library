@@ -69,7 +69,7 @@ class App extends Component {
           )} />
 
           <Route path={`/:faction/ships/:ship`} render={ ({match}) => (
-            <ShipPage match={match} title='Ship' data={this.state.factions[match.params.faction].ships[match.params.ship]} />
+            <ShipPage match={match} ship={this.state.factions[match.params.faction].ships[match.params.ship]} />
           )} />
 
         </main>
