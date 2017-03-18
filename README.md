@@ -2,4 +2,4 @@
 
 A wiki like library of data from the game Endless Sky.
 
-https://github.com/CodeDraken/ES-Library
+[ES Library](https://codedraken.github.io/ES-Library/)
