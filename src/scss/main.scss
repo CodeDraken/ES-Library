@@ -4,7 +4,8 @@
 'abstracts/functions',
 'abstracts/mixins';
 // 2. Vendors
-@import 'vendor/normalize';
+@import 'vendor/normalize',
+  'vendor/override';
 // 3. Base stuff
 @import 'base/base',
 'base/fonts',
@@ -17,6 +18,7 @@
 // 5. Components
 @import 'components/button';
 // 6. Page-specific styles
-@import 'pages/home';
+@import 'pages/home',
+  'pages/ship';
 // 7. Themes
 @import 'themes/default';
