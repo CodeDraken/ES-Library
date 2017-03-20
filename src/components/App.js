@@ -16,7 +16,7 @@ class App extends Component {
         'drak': {ships: {}, outfits: {}},
         'generic': {ships: {}, outfits: {}},
         'hai': {ships: {}, outfits: {}},
-        'kestrel': {ships: {}, outfits: {}},
+        'other': {ships: {}, outfits: {}},
         'korath': {ships: {}, outfits: {}},
         'marauders': {ships: {}, outfits: {}},
         'pug': {ships: {}, outfits: {}},
