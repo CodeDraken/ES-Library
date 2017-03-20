@@ -43,6 +43,10 @@ a {
   cursor: pointer;
 }
 
+td, th {
+  cursor: help;
+}
+
 // a:not(.brand-logo) {
 //   color: $blue;
 //   text-decoration: none;
