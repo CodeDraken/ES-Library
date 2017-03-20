@@ -6,23 +6,25 @@ import Home from './Home';
 import SelectPage from './SelectPage';
 import InfoPage from './InfoPage';
 import ShipPage from './ShipPage';
+import OutfitPage from './OutfitPage';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       factions: {
-        'coalition': {ships: {}, outfits: {}},
-        'drak': {ships: {}, outfits: {}},
-        'generic': {ships: {}, outfits: {}},
-        'hai': {ships: {}, outfits: {}},
-        'other': {ships: {}, outfits: {}},
-        'korath': {ships: {}, outfits: {}},
-        'marauders': {ships: {}, outfits: {}},
-        'pug': {ships: {}, outfits: {}},
-        'quarg': {ships: {}, outfits: {}},
-        'wanderer': {ships: {}, outfits: {}}
-      }
+        'coalition': {ships: {}},
+        'drak': {ships: {}},
+        'generic': {ships: {}},
+        'hai': {ships: {}},
+        'other': {ships: {}},
+        'korath': {ships: {}},
+        'marauders': {ships: {}},
+        'pug': {ships: {}},
+        'quarg': {ships: {}},
+        'wanderer': {ships: {}}
+      },
+      outfits: {}
     };
   }
 
@@ -35,10 +37,15 @@ class App extends Component {
       const newState = {};
       factions.forEach((faction) => {
         newState[faction] = {};
-        newState[faction].outfits = this.state.factions[faction].outfits;
         newState[faction].ships = ships[faction];
       });
       this.setState({factions: newState});
+    });
+    axios.get('https://raw.githubusercontent.com/CodeDraken/ES-Scraper/master/json/outfits/outfits.json').then((res) => {
+      const outfits = res.data;
+      this.setState({
+        outfits
+      });
     });
   }
 
@@ -57,19 +64,31 @@ class App extends Component {
         <main className="container">
 
           <Route exact path="/" render={ ({match}) => (
-            <Home match={match} factions={Object.keys(this.state.factions)} />
+            <Home match={match} />
           )} />
 
-          <Route exact path="/:faction" render={ ({match}) => (
-            <SelectPage match={match} title='What do you want to know about?' links={['Ships', 'Outfits']} relative={true} />
+          <Route exact path='/factions' render={({match}) => (
+            <SelectPage match={match} links={Object.keys(this.state.factions)} title='Select a Faction' relative={true} />
           )} />
 
-          <Route exact path={`/:faction/ships`} render={ ({match}) => (
+          <Route exact path='/factions/:faction' render={ ({match}) => (
+            <SelectPage match={match} title='What do you want to know about?' links={['Ships']} relative={true} />
+          )} />
+
+          <Route exact path={`/factions/:faction/ships`} render={ ({match}) => (
             <SelectPage match={match} title='Select a ship' relative={true} links={Object.keys(this.state.factions[match.params.faction].ships)} />
           )} />
 
-          <Route path={`/:faction/ships/:ship`} render={ ({match}) => (
+          <Route path={`/factions/:faction/ships/:ship`} render={ ({match}) => (
             <ShipPage match={match} ship={this.state.factions[match.params.faction].ships[match.params.ship]} />
+          )} />
+
+          <Route exact path={`/outfits`} render={ ({match}) => (
+            <SelectPage match={match} title='Select an outfit' relative={true} links={Object.keys(this.state.outfits)} />
+          )} />
+
+          <Route path={`/outfits/:outfit`} render={ ({match}) => (
+            <OutfitPage match={match} outfit={this.state.outfits[match.params.outfit]} />
           )} />
 
         </main>

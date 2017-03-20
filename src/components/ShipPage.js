@@ -2,7 +2,6 @@ import React from 'react';
 import PrevButton from './PrevButton';
 
 const ShipPage = ({ship, match}) => {
-  console.log(ship.attributes.automaton);
   let sprite;
   console.log('ship: ', ship)
   try {

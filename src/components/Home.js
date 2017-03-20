@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 
 import SelectPage from './SelectPage';
 
-const Home = ({factions}) => {
+const Home = () => {
   return (
     <div>
       <section>
@@ -19,7 +19,7 @@ const Home = ({factions}) => {
         </div>
       </section>
 
-      <SelectPage links={factions} title='Select a Faction' />
+      <SelectPage links={['factions', 'outfits']} title='View factions or outfits' />
 
     </div>
   );
