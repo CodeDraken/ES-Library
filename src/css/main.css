@@ -449,4 +449,15 @@ td, th {
   display: block;
   margin: 0 auto; }
 
+table.outfits th {
+  cursor: default; }
+table.outfits td {
+  display: inline-block;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out, border 0.2s ease-in-out; }
+  table.outfits td:hover {
+    background: #fffde7;
+    border: 1px solid #00e676; }
+
 /*# sourceMappingURL=main.css.map */

@@ -1,13 +1,31 @@
 import React from 'react';
+import uuid from 'uuid';
+import _ from 'lodash';
+import {Link} from 'react-router-dom';
+
 import PrevButton from './PrevButton';
 
 const ShipPage = ({ship, match}) => {
-  const { layout, outfits } = ship,
+  let { layout, outfits } = ship,
     attr = ship.attributes,
-    weapon = attr.weapon;
+    weapon = attr.weapon,
+    sprite;
 
-  let sprite;
   console.log('ship: ', ship)
+
+  if(outfits) {
+    let start = 0;
+    const out = outfits.reduce((p, c, i, a) => {
+      if (c === '' || i === a.length-1) {
+        let end = i === a.length - 1 ? i+1 : i;
+        p.push(a.slice(start, end));
+        start = i+1;
+      }
+      return p;
+    }, []);
+    outfits = out;
+  }
+
   try {
     sprite = require(`./../img/${(ship.sprite).replace(/ /g, '_')}.png`);
   } catch (err) {
@@ -75,34 +93,73 @@ const ShipPage = ({ship, match}) => {
                     <td><strong>Fuel Capacity</strong></td>
                     <td>{attr.fuelCap.toString()}</td>
                   </tr>
-                  <tr className="tooltipped" data-position="right" data-tooltip="the amount of cargo that can be carried.">
-                    <td><strong>Cargo Space</strong></td>
-                    <td>{attr.cargoSpace.toString()}</td>
+
+                </tbody>
+
+              </table>
+            </div>
+
+            <div className="col s12 m6 l8">
+              <img className="ship__sprite" src={ sprite } alt={ `${ship.name} missing image` } />
+              <table className="bordered outfits">
+                <thead>
+                  <tr>
+                    <th>Outfits</th>
                   </tr>
-                  <tr className="tooltipped" data-position="right" data-tooltip="the amount of outfits (weapons, generators, engines, etc.) that can be installed.">
-                    <td><strong>Outfit Space</strong></td>
-                    <td>{attr.outfitSpace.toString()}</td>
-                  </tr>
-                  <tr className="tooltipped" data-position="right" data-tooltip="the amount of outfit space that can be occupied by weapons.">
-                    <td><strong>Weapon Capacity</strong></td>
-                    <td>{attr.weaponCap.toString()}</td>
-                  </tr>
-                  <tr className="tooltipped" data-position="right" data-tooltip="the amount of that outfit space which is suitable for installing engines. Some ships have lots of engine capacity but not much weapon capacity, or vice versa.">
-                    <td><strong>Engine Capacity</strong></td>
-                    <td>{attr.engineCap.toString()}</td>
-                  </tr>
+                </thead>
+
+                <tbody>
+                  {outfits.map((outfitChunk) => {
+                    return (
+                      <tr key={uuid()}>
+                        {outfitChunk.map((outfit) => {
+                          return (
+                            <td key={uuid()}>
+                              <Link to={`/outfits/${outfit.toLowerCase().replace(/ \d+/g, '')}`}>
+                                {outfit}
+                              </Link>
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    );
+                  })}
                 </tbody>
 
               </table>
             </div>
 
 
-            <div className="col s12 m6 l8">
-              <img className="ship__sprite" src={ sprite } alt={ `${ship.name} missing image` } />
-            </div>
-
-
             <div className="col s12 m3 l2">
+              <table className="bordered highlight">
+                <thead>
+                  <tr className="tooltipped" data-position="left" data-tooltip="The ship's stats">
+                    <th data-field="attribute">Attribute</th>
+                    <th data-field="value"> Value</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="tooltipped" data-position="left" data-tooltip="the amount of cargo that can be carried.">
+                    <td><strong>Cargo Space</strong></td>
+                    <td>{attr.cargoSpace.toString()}</td>
+                  </tr>
+                  <tr className="tooltipped" data-position="left" data-tooltip="the amount of outfits (weapons, generators, engines, etc.) that can be installed.">
+                    <td><strong>Outfit Space</strong></td>
+                    <td>{attr.outfitSpace.toString()}</td>
+                  </tr>
+                  <tr className="tooltipped" data-position="left" data-tooltip="the amount of outfit space that can be occupied by weapons.">
+                    <td><strong>Weapon Capacity</strong></td>
+                    <td>{attr.weaponCap.toString()}</td>
+                  </tr>
+                  <tr className="tooltipped" data-position="left" data-tooltip="the amount of that outfit space which is suitable for installing engines. Some ships have lots of engine capacity but not much weapon capacity, or vice versa.">
+                    <td><strong>Engine Capacity</strong></td>
+                    <td>{attr.engineCap.toString()}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <br/>
+
               <table className="bordered highlight">
                 <thead>
                   <tr className="tooltipped" data-position="left" data-tooltip="How much damage this ship does when it explodes">

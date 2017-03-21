@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://codedraken.github.io/ES-Library/",
-  
   "dependencies": {
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
@@ -15,7 +14,8 @@
     "gh-pages": "^0.12.0",
     "react-router": "^4.0.0",
     "react-router-dom": "^4.0.0",
-    "react-scripts": "0.9.5"
+    "react-scripts": "0.9.5",
+    "uuid": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
